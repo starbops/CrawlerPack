@@ -40,7 +40,7 @@ import java.util.*;
  * 資料爬蟲包 
  *  
  * 
- * @author Abola Lee <abola921@gmail.com>
+ * @author <a href="mailto:abola921@gmail.com">Abola Lee</a>
  */
 public class CrawlerPack {
 
@@ -74,7 +74,7 @@ public class CrawlerPack {
         return defaultCrawler;
     }
 
-    private List<Cookie> cookies = new ArrayList<Cookie>();
+    private List<Cookie> cookies = new ArrayList<>();
 
 
     /**
@@ -108,7 +108,7 @@ public class CrawlerPack {
      *                of the session
      * @param secure if true this cookie can only be sent over secure
      * connections
-     *
+     * @return CrawlerPack
      */
     public CrawlerPack addCookie(String domain, String name, String value,
                   String path, Date expires, boolean secure) {
@@ -150,7 +150,7 @@ public class CrawlerPack {
      * Clear all cookies
      */
     void clearCookies(){
-        cookies = new ArrayList<Cookie>();
+        cookies = new ArrayList<>();
     }
 
 
@@ -207,7 +207,7 @@ public class CrawlerPack {
      * @return XML format string
      */
     public String jsonToXml(String json){
-        String xml = "";
+        String xml;
         // 處理直接以陣列開頭的JSON，並指定給予 row 的 tag
         if ( "[".equals( json.substring(0,1) ) ){
             xml = XML.toString(new JSONArray(json), "row");
@@ -223,6 +223,9 @@ public class CrawlerPack {
      *
      * 能使用的協定參考：
      * @see <a href="https://commons.apache.org/proper/commons-vfs/filesystems.html">commons-vfs filesystems</a>
+     *
+     * @param uri uri
+     * @return remoteContent
      */
     public String getFromRemote(String uri){
 
@@ -320,6 +323,7 @@ public class CrawlerPack {
      * 指定來源資料的編碼格式
      * 必需要在 get 前設定
      *
+     * @param encoding encoding
      * @return CrawlerPack
      */
     public CrawlerPack setRemoteEncoding(String encoding){
@@ -335,8 +339,8 @@ public class CrawlerPack {
 
     /**
      * Detecting real content encoding
-     * @param content
-     * @param offset
+     * @param content content
+     * @param offset offset
      * @return real charset encoding
      */
     private String detectCharset(byte[] content, Integer offset){
